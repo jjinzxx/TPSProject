@@ -2,6 +2,8 @@
 
 
 #include "TPSPlayer.h"
+
+#include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 
@@ -16,6 +18,11 @@ ATPSPlayer::ATPSPlayer()
 	springArmComp->SetupAttachment(RootComponent); // 계층 구조상 캡슐 컴포넌트가 ROOT이며 스프링암을 자식으로 배치
 	springArmComp->SetRelativeLocation(FVector(0.0f, 70.0f, 90.0f));
 	springArmComp->TargetArmLength = 400.0f; // 가까운 3인칭을 원하면 이걸 조절(원하는대로)
+	
+	// 카메라
+	cameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	cameraComp->SetupAttachment(springArmComp);
+	
 		
 }
 
