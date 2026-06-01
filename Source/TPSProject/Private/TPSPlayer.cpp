@@ -79,6 +79,7 @@ void ATPSPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		PlayerInput->BindAction(ia_LookUp, ETriggerEvent::Triggered, this, &ATPSPlayer::LookUp);
 		PlayerInput->BindAction(ia_Turn, ETriggerEvent::Triggered, this, &ATPSPlayer::Turn);
 		PlayerInput->BindAction(ia_Move, ETriggerEvent::Triggered, this, &ATPSPlayer::Move);
+		PlayerInput->BindAction(ia_Jump, ETriggerEvent::Started, this, &ATPSPlayer::InputJump);
 	}
 }
 
@@ -103,4 +104,10 @@ void ATPSPlayer::Move(const FInputActionValue& inputValue)
 
 	direction.X = value.X;
 	direction.Y = value.Y;
+}
+
+// 점프 입력에 따른 콜백 함수 구현
+void ATPSPlayer::InputJump(const FInputActionValue& inputValue)
+{
+	Jump(); // ACharacter 클래스가 제공하는 기본 점프 함수 호출
 }
