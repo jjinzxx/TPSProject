@@ -58,10 +58,13 @@ void ATPSPlayer::Tick(float DeltaTime)
 	// 플레이어 이동 처리
 	// P 결과 위치 = P0 초기 위치 + v 속도 * t 시간
 	direction = FTransform(GetControlRotation()).TransformFVector4(direction);
-	FVector P0 = GetActorLocation();
-	FVector vt = direction * walkSpeed * DeltaTime;
-	FVector P = P0 + vt;
-	SetActorLocation(P);
+	//FVector P0 = GetActorLocation();
+	//FVector vt = direction * walkSpeed * DeltaTime;
+	//FVector P = P0 + vt;
+	//SetActorLocation(P);
+	
+	// 언리얼엔진에서 제공하는 위 등속 운동을 구현한 함수
+	AddMovementInput(direction);
 	direction = FVector::ZeroVector;
 }
 
