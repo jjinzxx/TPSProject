@@ -54,14 +54,19 @@ void ATPSPlayer::BeginPlay()
 void ATPSPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
 	// 플레이어 이동 처리
-	// P 결과 위치 = P0 초기 위치 + v 속도 * t 시간
-	direction = FTransform(GetControlRotation()).TransformFVector4(direction);
-	//FVector P0 = GetActorLocation();
-	//FVector vt = direction * walkSpeed * DeltaTime;
-	//FVector P = P0 + vt;
-	//SetActorLocation(P);
+	//GetControlRotarion() 함수는 좌우(YAW) 말고도 상하 (PITCH)까지 포함된 카메라 전체 회전
+	// PITCH 움직임에 X축을 기울이는 성질이 있어서 카메라가 아래를 향하는 상태에서 W를 누르면
+	// "앞으로 가는 입력" + "아래로 박는 입력"으로 섞임 -> 이 때 수평 속도 cos(PITCH)가 줄어든다.
+	
+	// 컨트롤러의 현재 회전 값들(YAW, PITCH, ROLL) 값을 가져옴
+	FRotator controlRot = GetControlRotation();
+	// PITCH 자체를 0으로 - 기우는 현상 차단
+	controlRot.Pitch = 0.0f;
+	// ROLL도 0으로 고정 - 기우는 현상 차단
+	controlRot.Roll = 0.0f;
+	
+	direction = FRotationMatrix(controlRot).TransformVector(direction);
 	
 	// 언리얼엔진에서 제공하는 위 등속 운동을 구현한 함수
 	AddMovementInput(direction);
