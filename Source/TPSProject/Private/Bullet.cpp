@@ -44,12 +44,20 @@ ABullet::ABullet()
 	// 반동 값(탄성 계수 0~1)
 	movementComp->Bounciness = 0.3f;
 	
+	// 객체 생명 시간 제어(초 단위)
+	//InitialLifeSpan = 2.f;
+	
 }
 
 // Called when the game starts or when spawned
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	// 타이머에 알람을 등록하는것과 비슷하다
+	// SetTimer(핸들러, 대상 객체, 호출함수 포인터, 시간, 반복여부)
+	FTimerHandle deathTimer;
+	GetWorldTimerManager().SetTimer(deathTimer, this, &ABullet::Die, 2.f, false);
 	
 }
 
@@ -59,3 +67,8 @@ void ABullet::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+// 총알 소멸 함수 - 타이머 시간이 다 되면 호출 됨
+void ABullet::Die()
+{
+	Destroy();
+}
