@@ -53,13 +53,21 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	class UInputAction* ia_Move;
 	
-	// 점프 IA 필드 선언
+	// 키보드 점프 IA 필드 선언
 	UPROPERTY(EditDefaultsOnly, Category=Input)
 	class UInputAction* ia_Jump;
 
+	// 마우스 발사 IA 필드 선언
+	UPROPERTY(EditDefaultsOnly, Category=Input)
+	class UInputAction* ia_Fire;
+	
 	//이동 속도
 	UPROPERTY(EditDefaultsOnly, Category = PlayerSetting)
 	float walkSpeed = 600.f;
+	
+	// 총알 스폰 팩토리
+	UPROPERTY(EditDefaultsOnly, Category = BulletFactory)
+	TSubclassOf<class ABullet> bulletFactory;
 
 	//이동 방향
 	FVector direction;
@@ -75,4 +83,7 @@ public:
 	
 	// 점프 입력 함수 선언 
 	void InputJump(const struct FInputActionValue& inputValue);
+	
+	// 총알 발사 입력 함수 선언
+	void InputFire(const struct FInputActionValue& inputValue);
 };
