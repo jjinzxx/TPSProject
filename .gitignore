@@ -3,6 +3,7 @@
 # ============================================================
 .claude/
 .omc/
+.mcp.json
 .idea/
 .vsconfig
 *.sln.DotSettings.user
