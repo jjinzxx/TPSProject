@@ -34,9 +34,13 @@ public:
 	UPROPERTY(VisibleAnywhere, Category=Camera)
 	class UCameraComponent* cameraComp;
 	
-	// 총 스켈레탈 메쉬 컴포넌트 선언
+	// 유탄총 스켈레탈 메쉬 컴포넌트 선언
 	UPROPERTY(VisibleAnywhere, Category=GunMesh)
 	class USkeletalMeshComponent* gunMeshComp;
+	
+	// 스나이퍼 총 스태틱 메시 컴포넌트 선언
+	UPROPERTY(VisibleAnywhere, Category=GunMesh)
+	class UStaticMeshComponent* sniperMeshComp;
 	
 	// IMC 선택 필드 선언
 	UPROPERTY(EditAnywhere, Category=Input)
