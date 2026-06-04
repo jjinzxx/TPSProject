@@ -87,6 +87,10 @@ public:
 	UPROPERTY()
 	class UUserWidget* sniperUI;
 	
+	// 런타임에 생성될  크로스헤어 UI 인스턴스
+	UPROPERTY()
+	class UUserWidget* crosshairUI;
+	
 	//이동 속도
 	UPROPERTY(EditDefaultsOnly, Category = PlayerSetting)
 	float walkSpeed = 600.f;
@@ -99,6 +103,15 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = SniperUI)
 	TSubclassOf<class UUserWidget> sniperUIFactory;
 
+	// 스나이퍼(히트스캔) 명중 시 표시할 총알 파편 효과 선언
+	UPROPERTY(EditDefaultsOnly, Category = BulletEffect)
+	class UNiagaraSystem* bulletEffectFactory;
+	
+	// 일반 조준 크로스헤어 UI 위젯 팩토리
+	UPROPERTY(EditDefaultsOnly, Category = SniperUI)
+	TSubclassOf<class UUserWidget> crosshairUIFactory;
+
+	
 	//이동 방향
 	FVector direction;
 	
@@ -126,9 +139,7 @@ public:
 	// 스나이퍼 줌 입력 함수 선언
 	void SniperZoom();
 	
-	// 스나이퍼(히트스캔) 명중 시 표시할 총알 파편 효과 선언
-	UPROPERTY(EditDefaultsOnly, Category = BulletEffect)
-	class UNiagaraSystem* bulletEffectFactory;
+
 	
 	
 };
