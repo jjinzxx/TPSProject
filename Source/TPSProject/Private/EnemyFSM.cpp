@@ -69,6 +69,7 @@ void UEnemyFSM::IdleState()
 		// 경과 시간 초기화
 		currentTime = 0.f;
 	}
+	
 }
 // 추적 상태 - 플레이어 방향으로 이동, 공격 범위 진입 시 공격 상태로 전환
 void UEnemyFSM::MoveState()
@@ -89,7 +90,20 @@ void UEnemyFSM::MoveState()
 // 공격 상태 - 일정 주기로 공격, 플레이어가 범위 이탈 시 추적으로 전환
 void UEnemyFSM::AttackState()
 {
+	// 주기적으로 플레이어를 공격(로그)
+	currentTime += GetWorld()->GetDeltaSeconds();
+	if (currentTime > attackDelayTime)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Attack!!"));
+		currentTime = 0.f;
+	}
 	
+	// 타겟이 공격 범위를 벗어나면 -> Move 상태로 전환
+	float distance = FVector::Distance(target->GetActorLocation(), me->GetActorLocation());
+	if (distance > attackRange)
+	{
+		mState = EEnemyState::Move;
+	}
 }
 // 피격 상태 - 잠시 멈춤 후 대기로 복귀
 void UEnemyFSM::DamageState()

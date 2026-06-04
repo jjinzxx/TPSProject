@@ -64,6 +64,10 @@ public:
 	class AEnemy* me;
 	
 	// 공격 범위
-	UPROPERTY(EditDefaultsOnly, Category=FSM)
+	UPROPERTY(EditAnywhere, Category=FSM)
 	float attackRange = 150.f;
+	
+	// 공격 주기
+	UPROPERTY(EditAnywhere, Category=FSM)
+	float attackDelayTime = 1.f;
 };
