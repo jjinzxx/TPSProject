@@ -108,8 +108,29 @@ void UEnemyFSM::AttackState()
 // 피격 상태 - 잠시 멈춤 후 대기로 복귀
 void UEnemyFSM::DamageState()
 {
-	
+	currentTime += GetWorld()->GetDeltaSeconds();
+	if (currentTime > damageDelayTime)
+	// 경과 시간이 대기시간을 초과 했다면 
+	{
+		mState = EEnemyState::Idle;
+		currentTime = 0.f;
+	}
+}\
+void UEnemyFSM::OnDamageProcess()
+{
+	// 체력 감소
+	hp--;
+	if (hp > 0)
+	{
+		mState = EEnemyState::Damage;
+		
+	}
+	else
+	{
+		mState = EEnemyState::Die;
+	}
 }
+
 // 사망 상태 - 사망 처리(종착 상태, 더이상 전이 없음)
 void UEnemyFSM::DieState()
 {
