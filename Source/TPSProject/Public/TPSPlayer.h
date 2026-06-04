@@ -126,6 +126,9 @@ public:
 	// 스나이퍼 줌 입력 함수 선언
 	void SniperZoom();
 	
+	// 스나이퍼(히트스캔) 명중 시 표시할 총알 파편 효과 선언
+	UPROPERTY(EditDefaultsOnly, Category = BulletEffect)
+	class UNiagaraSystem* bulletEffectFactory;
 	
 	
 };
