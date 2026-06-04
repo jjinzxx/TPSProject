@@ -173,9 +173,14 @@ void ATPSPlayer::InputFire(const FInputActionValue& inputValue)
 	{
 		// 유탄총을 사용하는 경우 
 		// 총 스켈레탈 메시에 FirePosition 이란 이름의 소켓의 월드 트랜스폼(위치/회전)을 가져옴
-		FTransform firePosition = gunMeshComp->GetSocketTransform(TEXT("FirePosition"));
+		//FTransform firePosition = gunMeshComp->GetSocketTransform(TEXT("FirePosition"));
+		FVector spawnLocation = gunMeshComp->GetSocketLocation(TEXT("FirePosition"));
+		FRotator spawnRotation = cameraComp->GetComponentRotation();
+		
+		
 		// 위 위치/회전으로 BulletFactory가 BP_Bullet 인스턴스를 월드에 스폰
-		GetWorld()->SpawnActor<ABullet>(bulletFactory, firePosition);
+		//GetWorld()->SpawnActor<ABullet>(bulletFactory, firePosition);
+		GetWorld()->SpawnActor<ABullet>(bulletFactory, spawnLocation, spawnRotation);
 	}
 	else
 	{
